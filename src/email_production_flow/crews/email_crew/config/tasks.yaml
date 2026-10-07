@@ -1,0 +1,25 @@
+find_policy_task:
+  description: >
+    Email reçu de {sender}, sujet "{subject}".
+    Contenu: {body}
+
+    Cherche dans la base de connaissance interne la politique applicable
+    (facturation, support technique, ou réunions partenariat).
+  expected_output: >
+    La référence exacte de la politique applicable (ex: "Politique Support
+    Technique §1") suivie d'un résumé de ce qu'elle impose comme action.
+  agent: policy_analyst
+
+draft_reply_task:
+  description: >
+    À partir de la politique trouvée à l'étape précédente, rédige un
+    brouillon de réponse à {sender} pour l'email "{subject}". Le brouillon
+    doit citer explicitement la référence de politique utilisée.
+
+    Créneau de réunion proposé (vide si non applicable): {meeting_slot}
+    Si non vide, intègre-le explicitement dans le brouillon comme proposition.
+  expected_output: >
+    Un brouillon d'email avec destinataire, sujet et corps du message,
+    citant la référence de politique interne. Ne jamais indiquer que
+    l'email a été envoyé — c'est un brouillon en attente de validation humaine.
+  agent: drafter
